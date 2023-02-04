@@ -1,0 +1,14 @@
+alias rebuild="sudo nixos-rebuild switch"
+alias gc="sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +3 && nix-collect-garbage"
+alias display-off="sudo systemctl stop display-manager"
+alias display-on="sudo systemctl start display-manager"
+alias proxy-on="export https_proxy=127.0.0.1:7890 && export http_proxy=127.0.0.1:7890"
+alias proxy-off="unset https_proxy http_proxy"
+alias clash-on="screen -S clash clash"
+alias clash-off="screen kill clash"
+alias chm-p="chromium --proxy-server=http://localhost:7890"
+# 仅针对我个人需求，快速重排显示器位置
+# 双屏
+alias m2="xrandr --output eDP-1 --mode 1920x1080 --rate 60 --pos 0x0 --primary --output HDMI-2 --mode 2560x1440 --rate 60 --rotate left --pos -1440x-1050"
+# 单屏
+alias m1="xrandr --output eDP-1 --off"
