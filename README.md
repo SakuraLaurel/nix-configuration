@@ -63,7 +63,7 @@
 
 - Nixpkgs二进制缓存
   
-  ```nix
+  ```
   nix.settings.substituters = [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
   ```
 
@@ -79,14 +79,14 @@
 
 同时为了允许vscode等非自由软件安装，设置
 
-```nix
+```
 nixpkgs.config.allowUnfree = true;
 ```
 
 - `sudo nix-channel --list | grep nixos`: 查看当前channel。注意root和普通用户是不一样的。
 - 自动升级：
 
-  ```nix
+  ```
   system.autoUpgrade.enable = true;
   system.autoUpgrade.allowReboot = true;
   ``` 
@@ -97,7 +97,7 @@ nixpkgs.config.allowUnfree = true;
 
 以Linux QQ为例，可以找到[别人打包好的文件](https://github.com/nix-community/nur-combined/tree/master/repos/xddxdd/pkgs/uncategorized/qq)，是用户xddxdd的qq包，于是
 
-```nix
+```
 # 添加nur源
 nixpkgs.config.packageOverrides = pkgs: {
   nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
@@ -117,7 +117,7 @@ environment.systemPackages = with pkgs; [
 
 系统[默认使用](https://nixos.wiki/wiki/Linux_kernel)的内核是最新的LTS内核，可能尚未兼容UHD700系列的核显，需要设置
 
-```nix
+```
 boot.kernelPackages = pkgs.linuxPackages_latest;
 ```
 
@@ -129,7 +129,7 @@ boot.kernelPackages = pkgs.linuxPackages_latest;
 
 使用sddm + kde桌面：
 
-```nix
+```
 services.xserver.enable = true;
 services.xserver.displayManager.sddm.enable = true;
 services.xserver.displayManager.autoLogin.enable = true;
@@ -143,7 +143,7 @@ services.xserver.desktopManager.plasma5.excludePackages = with pkgs; [  # 剔除
 ```
 
 如果不喜欢KWalletManager，可以在plasma5桌面设置中禁用。另：12代酷睿核显[硬解视频](https://nixos.wiki/wiki/Accelerated_Video_Playback)
-```nix
+```
 nixpkgs.config.chromium.commandLineArgs = "--disable-features=UseChromeOSDirectVideoDecoder";
 hardware.opengl = {
   enable = true;
@@ -161,7 +161,7 @@ hardware.opengl = {
 
 使用fcitx5 + chinese-addons进行输入，日语输入法为mozc，配置如下
 
-```nix
+```
 i18n.defaultLocale = "en_US.UTF-8";  # Arch的习惯，但似乎更多人使用zh_CN。如果在这里使用en_US，进入KDE之后需要修改语言。
 i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" "zh_CN.UTF-8/UTF-8" ];
 i18n.extraLocaleSettings = {
@@ -188,7 +188,7 @@ i18n.inputMethod = {
 ```
 
 字体参考[bobby285271](https://github.com/bobby285271/nixos-config/blob/master/desktop/fonts.nix)
-```nix
+```
 fonts = {
   enableDefaultFonts = true;
   fontconfig = {
@@ -230,7 +230,7 @@ fonts = {
 
 # 6. 网络配置
 
-```nix
+```
 networking.networkmanager.enable = true;
 users.users.alice.extraGroups = [ "networkmanager" ];  # 这条不是新增的，是在extraGroups里面加入networkmanager。注意这里的用户是alice。
 ```
@@ -252,7 +252,7 @@ users.users.alice.extraGroups = [ "networkmanager" ];  # 这条不是新增的�
 # 7. 远程访问
 
 - OpenSSH
-  ```nix
+  ```
   services.openssh.enable = true;
   services.openssh.ports = [11451];  # 修改端口
   services.openssh.forwardX11 = true;  # 允许使用图形化程序
@@ -262,7 +262,7 @@ users.users.alice.extraGroups = [ "networkmanager" ];  # 这条不是新增的�
   ```
 
 - Samba
-  ```nix
+  ```
   services.samba = {
     enable = true;
     openFirewall = true;
@@ -283,7 +283,7 @@ users.users.alice.extraGroups = [ "networkmanager" ];  # 这条不是新增的�
 
 # 8. 挂载硬盘
 
-```nix
+```
 boot.supportedFilesystems = [ "ntfs" ];  # 使用ntfs-3g支持
 
 fileSystems."/path/to/mount/to" =
@@ -300,7 +300,7 @@ fileSystems."/data" =
 
 # 9. 其他有用的安装包
 
-```nix
+```
 environment.systemPackages = with pkgs; [
   wget
   nix-index  # 文件查找
