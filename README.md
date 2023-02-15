@@ -284,22 +284,11 @@ users.users.alice.extraGroups = [ "networkmanager" ];  # 这条不是新增的�
 
 - VSCode
 
-  vscode的nodejs和nixos存在某种冲突，无法远程连上nixos后使用。解决方法如下：
+  vscode的nodejs和nixos存在某种冲突，无法远程连上nixos后使用。现在已有简便的解决方法，修改`configuration.nix`: 
 
-  1. 使用vscode连接一次nixos，确保`~/.vscode-server`文件夹被创建；
-  2. 安装nodejs
-     ```
-     environment.systemPackages = with pkgs; [
-       nodejs 
-     ];
-     ```
-  3. 替换vscode的nodejs
-
-     `cd ~/.vscode-server/bin/*/`
-
-     `rm node`
-     
-     `ln -s $(which node)`
+  ```
+  programs.nix-ld.enable = true;
+  ```
   
 
 # 8. 挂载硬盘
