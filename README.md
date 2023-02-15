@@ -280,7 +280,27 @@ users.users.alice.extraGroups = [ "networkmanager" ];  # 这条不是新增的�
   };
   ```
 
-这里sakura是我的用户名。在命令行输入`sudo smbpasswd -a sakura`来为该用户设置samba密码。
+  这里sakura是我的用户名。在命令行输入`sudo smbpasswd -a sakura`来为该用户设置samba密码。
+
+- VSCode
+
+  vscode的nodejs和nixos存在某种冲突，无法远程连上nixos后使用。解决方法如下：
+
+  1. 使用vscode连接一次nixos，确保`~/.vscode-server`文件夹被创建；
+  2. 安装nodejs
+     ```
+     environment.systemPackages = with pkgs; [
+       nodejs 
+     ];
+     ```
+  3. 替换vscode的nodejs
+
+     `cd ~/.vscode-server/bin/*/`
+
+     `rm node`
+     
+     `ln -s $(which node)`
+  
 
 # 8. 挂载硬盘
 
