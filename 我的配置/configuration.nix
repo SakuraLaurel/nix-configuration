@@ -151,7 +151,7 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.openssh.ports = [ 12520];
-  services.openssh.forwardX11 = true;
+  services.openssh.settings.X11forwarding = true;
   services.samba = {
     enable = true;
     openFirewall = true;

@@ -45,6 +45,7 @@
 - `sudo nixos-rebuild test`: 更新配置，尽量在当前系统中实现更新，但不将新版本设为启动首选项，以便重启恢复原样。
 - `sudo nixos-rebuild boot`: 更新配置，不在当前系统中更新，但将新版本设为启动首选项。
 - `sudo nixos-rebuild build`: 不更新配置，仅测试是否可以正常编译。
+- `sudo nixos-rebuild switch --option substituters "https://mirror.tuna.tsinghua.edu.cn/nix-channels/store"`: 立刻、临时启用其他二进制缓存源。
 - `sudo nixos-rebuild switch --upgrade`: 系统升级。
 - 回收磁盘空间：假设要保留最近3次构建的nixos版本
 
@@ -255,7 +256,7 @@ users.users.alice.extraGroups = [ "networkmanager" ];  # 这条不是新增的�
   ```
   services.openssh.enable = true;
   services.openssh.ports = [11451];  # 修改端口
-  services.openssh.forwardX11 = true;  # 允许使用图形化程序
+  services.openssh.settings.X11forwarding = true;  # 允许使用图形化程序
 
   networking.firewall.allowedTCPPorts = [11451];  # 防火墙
   networking.firewall.allowedUDPPorts = [11451];
