@@ -1,3 +1,7 @@
+# -1. 最后更新
+
+我已经弃用NixOS了。Nix理念很先进，但其抛弃了LFS，却没有尽力去改善兼容性，导致安装Matlab之类的软件异常困难。系统的小毛病连续不断，却没有Arch Linux那样详细的整合与引导。我已经把手上的几台电脑又刷回了Arch Linux。
+
 # 0. RTFM
 
 - [manual](https://nixos.org/manual/nixos/stable/)
